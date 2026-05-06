@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Taco Loco – Bold Street Tacos</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --chili: #C0392B;
+    --gold: #E67E22;
+    --lime: #27AE60;
+    --cream: #FDF6EC;
+    --dark: #1A0A00;
+    --text: #3B1F0A;
+    --muted: #7B5C3A;
+    --card-bg: #FFFAF3;
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Lato', sans-serif; background: var(--cream); color: var(--text); overflow-x: hidden; }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: var(--dark);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 2.5rem; height: 60px;
+  }
+  .nav-logo { font-family: 'Bebas Neue', sans-serif; font-size: 2rem; color: var(--gold); letter-spacing: 3px; }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a { color: #fff; text-decoration: none; font-size: 0.85rem; letter-spacing: 1.5px; text-transform: uppercase; opacity: 0.8; transition: opacity 0.2s, color 0.2s; }
+  .nav-links a:hover { opacity: 1; color: var(--gold); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #1A0A00 0%, #3B1200 50%, #6B2000 100%);
+    display: flex; align-items: center; justify-content: center;
+    text-align: center; padding: 80px 2rem 4rem;
+    position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  }
+  .hero-emoji { font-size: 5rem; display: block; margin-bottom: 1rem; animation: bounce 2s infinite; }
+  @keyframes bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-12px)} }
+  .hero h1 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(4rem, 12vw, 9rem); color: #fff; letter-spacing: 8px; line-height: 1; }
+  .hero h1 span { color: var(--gold); }
+  .hero-tagline { font-size: 1.1rem; color: rgba(255,255,255,0.7); letter-spacing: 3px; text-transform: uppercase; margin: 1rem 0 2rem; }
+  .hero-badges { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-bottom: 2.5rem; }
+  .badge { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); color: rgba(255,255,255,0.85); padding: 6px 18px; border-radius: 999px; font-size: 0.8rem; letter-spacing: 1px; }
+  .badge.hot { background: rgba(192,57,43,0.3); border-color: var(--chili); color: #ff9a9a; }
+  .badge.veg { background: rgba(39,174,96,0.2); border-color: var(--lime); color: #7ee8a2; }
+  .cta-btn {
+    display: inline-block; background: var(--gold); color: #fff; text-decoration: none;
+    padding: 14px 40px; border-radius: 4px; font-size: 1rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+    transition: background 0.2s, transform 0.15s;
+  }
+  .cta-btn:hover { background: #d35400; transform: translateY(-2px); }
+
+  /* SECTION */
+  section { padding: 5rem 2rem; }
+  .section-label { text-align: center; font-size: 0.8rem; letter-spacing: 4px; text-transform: uppercase; color: var(--gold); margin-bottom: 0.5rem; }
+  .section-title { text-align: center; font-family: 'Bebas Neue', sans-serif; font-size: clamp(2.5rem, 6vw, 4rem); color: var(--dark); letter-spacing: 4px; margin-bottom: 3rem; }
+
+  /* STORY */
+  .story { background: var(--dark); color: #fff; }
+  .story .section-title { color: #fff; }
+  .story-grid { max-width: 900px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; }
+  .story-text p { line-height: 1.9; color: rgba(255,255,255,0.75); margin-bottom: 1rem; }
+  .story-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+  .stat-card { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; padding: 1.5rem; text-align: center; }
+  .stat-num { font-family: 'Bebas Neue', sans-serif; font-size: 3rem; color: var(--gold); line-height: 1; }
+  .stat-lbl { font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-top: 4px; }
+
+  /* MENU */
+  .menu { background: var(--cream); }
+  .menu-grid { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; }
+  .taco-card {
+    background: var(--card-bg);
+    border-radius: 12px;
+    border: 1.5px solid #EDD9B0;
+    overflow: hidden;
+    transition: transform 0.25s, box-shadow 0.25s;
+    cursor: default;
+  }
+  .taco-card:hover { transform: translateY(-6px); box-shadow: 0 16px 40px rgba(60,20,0,0.12); }
+  .taco-img {
+    height: 140px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 4rem;
+    position: relative;
+  }
+  .taco-img.chicken { background: linear-gradient(135deg, #FFF3CD, #FFE08A); }
+  .taco-img.pork    { background: linear-gradient(135deg, #FFDDD2, #FFBBA0); }
+  .taco-img.beef    { background: linear-gradient(135deg, #F5E6E0, #E8C4B8); }
+  .taco-img.fish    { background: linear-gradient(135deg, #D6EAF8, #A9CCE3); }
+  .taco-img.avocado { background: linear-gradient(135deg, #D5F5E3, #A9DFBF); }
+  .taco-tag {
+    position: absolute; top: 10px; right: 10px;
+    font-size: 0.65rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase;
+    padding: 3px 10px; border-radius: 999px;
+  }
+  .tag-nonveg { background: #C0392B; color: #fff; }
+  .tag-veg    { background: #27AE60; color: #fff; }
+  .taco-body { padding: 1.2rem; }
+  .taco-name { font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; letter-spacing: 2px; color: var(--dark); }
+  .taco-desc { font-size: 0.82rem; color: var(--muted); line-height: 1.6; margin: 0.4rem 0 0.8rem; }
+  .taco-price { font-size: 1.2rem; font-weight: 700; color: var(--chili); }
+  .taco-spice { font-size: 0.8rem; margin-top: 2px; color: var(--gold); }
+
+  /* WHY US */
+  .why { background: #3B1200; }
+  .why .section-title { color: #fff; }
+  .why-grid { max-width: 900px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; }
+  .why-card { text-align: center; padding: 2rem 1rem; }
+  .why-icon { font-size: 2.5rem; margin-bottom: 1rem; }
+  .why-title { font-family: 'Bebas Neue', sans-serif; font-size: 1.4rem; letter-spacing: 2px; color: var(--gold); margin-bottom: 0.5rem; }
+  .why-text { font-size: 0.85rem; color: rgba(255,255,255,0.6); line-height: 1.7; }
+
+  /* HOURS */
+  .hours { background: var(--cream); }
+  .hours-container { max-width: 700px; margin: 0 auto; }
+  .hours-card {
+    background: var(--card-bg);
+    border: 1.5px solid #EDD9B0;
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  .hours-header { background: var(--dark); padding: 1.5rem 2rem; display: flex; align-items: center; gap: 1rem; }
+  .hours-header h3 { font-family: 'Bebas Neue', sans-serif; font-size: 1.8rem; color: var(--gold); letter-spacing: 3px; }
+  .hours-body { padding: 1.5rem 2rem; }
+  .hours-row { display: flex; justify-content: space-between; align-items: center; padding: 0.75rem 0; border-bottom: 1px solid #EDD9B0; font-size: 0.95rem; }
+  .hours-row:last-child { border-bottom: none; }
+  .hours-day { font-weight: 700; color: var(--text); }
+  .hours-time { color: var(--muted); }
+  .hours-time.open { color: var(--lime); font-weight: 700; }
+
+  /* CONTACT */
+  .contact { background: var(--dark); color: #fff; }
+  .contact .section-title { color: #fff; }
+  .contact-grid { max-width: 800px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+  .contact-card { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 10px; padding: 1.5rem; }
+  .contact-icon { font-size: 2rem; margin-bottom: 0.75rem; }
+  .contact-card h4 { font-family: 'Bebas Neue', sans-serif; font-size: 1.3rem; letter-spacing: 2px; color: var(--gold); margin-bottom: 0.5rem; }
+  .contact-card p { font-size: 0.9rem; color: rgba(255,255,255,0.65); line-height: 1.7; }
+
+  /* FOOTER */
+  footer { background: #0D0500; text-align: center; padding: 2rem; }
+  footer p { color: rgba(255,255,255,0.3); font-size: 0.8rem; letter-spacing: 1px; }
+  footer .footer-logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.8rem; color: var(--gold); letter-spacing: 4px; margin-bottom: 0.5rem; }
+
+  @media (max-width: 600px) {
+    .story-grid, .contact-grid { grid-template-columns: 1fr; }
+    nav { padding: 0 1rem; }
+    .nav-links { gap: 1rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">🌮 Taco Loco</div>
+  <ul class="nav-links">
+    <li><a href="#menu">Menu</a></li>
+    <li><a href="#story">Our Story</a></li>
+    <li><a href="#hours">Hours</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div style="position:relative;z-index:1">
+    <span class="hero-emoji">🌮</span>
+    <h1>TACO <span>LOCO</span></h1>
+    <p class="hero-tagline">Bold Flavors · Street-Style Tacos · Made Fresh Daily</p>
+    <div class="hero-badges">
+      <span class="badge hot">🔥 Non-Veg Specials</span>
+      <span class="badge veg">🥑 Veg Friendly</span>
+      <span class="badge">🏆 Since 2010</span>
+    </div>
+    <a href="#menu" class="cta-btn">Explore Our Menu</a>
+  </div>
+</section>
+
+<!-- STORY -->
+<section class="story" id="story">
+  <p class="section-label">Our Story</p>
+  <h2 class="section-title">BORN ON THE STREETS</h2>
+  <div class="story-grid">
+    <div class="story-text">
+      <p>Taco Loco was born from a single dream: to bring the vibrant, smoky, unapologetically bold flavors of authentic street tacos to every table.</p>
+      <p>Every taco we make is crafted from scratch — hand-pressed tortillas, slow-cooked meats, and salsas made fresh every morning. We take our food seriously, but never ourselves.</p>
+      <p>Whether you're a die-hard carnivore or a devoted veg lover, there's a taco here with your name on it.</p>
+    </div>
+    <div class="story-stats">
+      <div class="stat-card"><div class="stat-num">14+</div><div class="stat-lbl">Years Serving</div></div>
+      <div class="stat-card"><div class="stat-num">5</div><div class="stat-lbl">Signature Tacos</div></div>
+      <div class="stat-card"><div class="stat-num">100%</div><div class="stat-lbl">Fresh Daily</div></div>
+      <div class="stat-card"><div class="stat-num">∞</div><div class="stat-lbl">Good Vibes</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- MENU -->
+<section class="menu" id="menu">
+  <p class="section-label">Our Signature Tacos</p>
+  <h2 class="section-title">THE TACO LINE-UP</h2>
+  <div class="menu-grid">
+
+    <div class="taco-card">
+      <div class="taco-img chicken">
+        🍗
+        <span class="taco-tag tag-nonveg">Non-Veg</span>
+      </div>
+      <div class="taco-body">
+        <div class="taco-name">Chicken Taco</div>
+        <p class="taco-desc">Grilled adobo chicken, pico de gallo, jalapeño crema & fresh cilantro on a warm corn tortilla.</p>
+        <div class="taco-price">₹180</div>
+        <div class="taco-spice">🌶 Mildly Spicy</div>
+      </div>
+    </div>
+
+    <div class="taco-card">
+      <div class="taco-img pork">
+        🐷
+        <span class="taco-tag tag-nonveg">Non-Veg</span>
+      </div>
+      <div class="taco-body">
+        <div class="taco-name">Pork Taco</div>
+        <p class="taco-desc">Slow-braised carnitas, pickled red onions, chipotle sauce & a squeeze of fresh lime.</p>
+        <div class="taco-price">₹200</div>
+        <div class="taco-spice">🌶🌶 Medium Spicy</div>
+      </div>
+    </div>
+
+    <div class="taco-card">
+      <div class="taco-img beef">
+        🥩
+        <span class="taco-tag tag-nonveg">Non-Veg</span>
+      </div>
+      <div class="taco-body">
+        <div class="taco-name">Beef Taco</div>
+        <p class="taco-desc">Smoky charcoal-grilled beef, roasted salsa roja, cotija cheese & fresh avocado slices.</p>
+        <div class="taco-price">₹220</div>
+        <div class="taco-spice">🌶🌶🌶 Hot!</div>
+      </div>
+    </div>
+
+    <div class="taco-card">
+      <div class="taco-img fish">
+        🐟
+        <span class="taco-tag tag-nonveg">Non-Veg</span>
+      </div>
+      <div class="taco-body">
+        <div class="taco-name">Fish Taco</div>
+        <p class="taco-desc">Baja-style beer-battered fish, crunchy cabbage slaw, chipotle mayo & mango salsa.</p>
+        <div class="taco-price">₹210</div>
+        <div class="taco-spice">🌶 Mild & Tangy</div>
+      </div>
+    </div>
+
+    <div class="taco-card">
+      <div class="taco-img avocado">
+        🥑
+        <span class="taco-tag tag-veg">Veg</span>
+      </div>
+      <div class="taco-body">
+        <div class="taco-name">Avocado Taco</div>
+        <p class="taco-desc">Creamy smashed avocado, roasted corn, black beans, feta, pickled jalapeños & lime zest.</p>
+        <div class="taco-price">₹160</div>
+        <div class="taco-spice">🌿 Fresh & Zesty</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- WHY US -->
+<section class="why">
+  <p class="section-label" style="color:rgba(255,255,255,0.4)">Why Taco Loco?</p>
+  <h2 class="section-title">THE LOCO DIFFERENCE</h2>
+  <div class="why-grid">
+    <div class="why-card">
+      <div class="why-icon">🫓</div>
+      <div class="why-title">Hand-Pressed Tortillas</div>
+      <p class="why-text">Every tortilla is pressed fresh to order, never store-bought or pre-packaged.</p>
+    </div>
+    <div class="why-card">
+      <div class="why-icon">🔥</div>
+      <div class="why-title">Open-Fire Grilling</div>
+      <p class="why-text">Our meats are cooked over real charcoal for that unmistakable smoky depth of flavor.</p>
+    </div>
+    <div class="why-card">
+      <div class="why-icon">🌿</div>
+      <div class="why-title">Fresh Ingredients</div>
+      <p class="why-text">We source vegetables and herbs daily from local farms. No shortcuts, ever.</p>
+    </div>
+    <div class="why-card">
+      <div class="why-icon">❤️</div>
+      <div class="why-title">Made With Love</div>
+      <p class="why-text">Family recipes, passed down two generations. You can taste the difference.</p>
+    </div>
+  </div>
+</section>
+
+<!-- HOURS -->
+<section class="hours" id="hours">
+  <p class="section-label">Find Us</p>
+  <h2 class="section-title">HOURS & LOCATION</h2>
+  <div class="hours-container">
+    <div class="hours-card">
+      <div class="hours-header">
+        <span style="font-size:2rem">🕐</span>
+        <h3>Opening Hours</h3>
+      </div>
+      <div class="hours-body">
+        <div class="hours-row"><span class="hours-day">Monday – Wednesday</span><span class="hours-time">11:00 AM – 10:00 PM</span></div>
+        <div class="hours-row"><span class="hours-day">Thursday – Friday</span><span class="hours-time open">11:00 AM – 12:00 AM</span></div>
+        <div class="hours-row"><span class="hours-day">Saturday</span><span class="hours-time open">10:00 AM – 1:00 AM</span></div>
+        <div class="hours-row"><span class="hours-day">Sunday</span><span class="hours-time">10:00 AM – 11:00 PM</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <p class="section-label" style="color:rgba(255,255,255,0.35)">Get In Touch</p>
+  <h2 class="section-title">REACH OUT</h2>
+  <div class="contact-grid">
+    <div class="contact-card">
+      <div class="contact-icon">📍</div>
+      <h4>Visit Us</h4>
+      <p>42 Fiesta Street<br>Food Market District<br>Your City – 141001</p>
+    </div>
+    <div class="contact-card">
+      <div class="contact-icon">📞</div>
+      <h4>Call Us</h4>
+      <p>+91 98765 43210<br>For reservations & bulk orders<br>Mon–Sun, 10 AM – 11 PM</p>
+    </div>
+    <div class="contact-card">
+      <div class="contact-icon">📱</div>
+      <h4>Follow Us</h4>
+      <p>@TacoLocoOfficial<br>Instagram · Facebook · Twitter<br>Daily specials & events</p>
+    </div>
+    <div class="contact-card">
+      <div class="contact-icon">📧</div>
+      <h4>Email Us</h4>
+      <p>hello@tacoloco.com<br>Catering & party inquiries<br>We reply within 24 hours</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">🌮 TACO LOCO</div>
+  <p>© 2024 Taco Loco. All rights reserved. | Made with 🔥 & love.</p>
+</footer>
+
+</body>
+</html>
